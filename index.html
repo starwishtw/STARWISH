@@ -184,7 +184,7 @@ function initUI(){
 
 function calc(){
   if(!C)return {total:0};
-  const on=C.services.filter(s=>st.on[s.id]),baseT=Math.round(C.base*on.length/C.services.length);
+  const on=C.services.filter(s=>st.on[s.id]),baseT=Math.round(C.base*on.reduce((a,s)=>a+s.w,0)/C.services.reduce((a,s)=>a+s.w,0));
   const svcOpt=on.reduce((a,s)=>a+optPrice(s.id,s.options),0);
   const items=[...C.print.goods,...C.print.decor];
   const goodsT=items.reduce((a,[n,p])=>a+p*st.qty[n],0),printOpt=goodsT?optPrice("print",C.print.options):0;
@@ -255,6 +255,7 @@ C={
   {
    "id": "venue",
    "name": "場地媒合服務",
+   "w": 5,
    "desc": "依你的檔期找出有空檔的咖啡廳，不用自己一間間問。",
    "options": [
     {
@@ -339,6 +340,7 @@ C={
   {
    "id": "promo",
    "name": "社群宣傳服務",
+   "w": 5,
    "desc": "透過整合帳號觸及更多粉絲，提升活動曝光。",
    "options": [
     {
@@ -409,6 +411,7 @@ C={
   {
    "id": "exec",
    "name": "現場執行支援",
+   "w": 11,
    "desc": "解決一個人要同時發應援物、控管人流的問題。",
    "options": [
     {
@@ -453,6 +456,7 @@ C={
   {
    "id": "plan",
    "name": "活動規劃服務",
+   "w": 5,
    "desc": "規劃當天流程、動線、小活動與應援物數量。",
    "options": [
     {
@@ -511,6 +515,7 @@ C={
   {
    "id": "setup",
    "name": "場地佈置協助",
+   "w": 5,
    "desc": "活動前由小助手協助佈置，主辦方不用熬夜。",
    "options": [
     {
@@ -560,6 +565,7 @@ C={
   {
    "id": "record",
    "name": "活動紀錄服務",
+   "w": 11,
    "desc": "攝影師全程記錄，供主辦方後續發文使用。",
    "options": [
     {
